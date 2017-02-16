@@ -27,6 +27,10 @@ namespace RS_Roguelike
         private static readonly int _inventoryHeight = 11;
         private static RLConsole _inventoryConsole;
 
+        public static Player Player { get; private set; }
+
+        public static DungeonMap DungeonMap { get; private set; }
+
         public static void Main()
         {
             // This must be the exact name of the bitmap font file we are using or it will error.
@@ -42,6 +46,17 @@ namespace RS_Roguelike
             _statConsole = new RLConsole(_statWidth, _statHeight);
             _inventoryConsole = new RLConsole(_inventoryWidth, _inventoryHeight);
 
+            // Set background colour for each console.
+            _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, Colors.FloorBackground);
+            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater);
+            _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Swatch.DbOldStone);
+            _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Swatch.DbWood);
+
+            Player = new Player();
+            MapGenerator mapGenerator = new RS_Roguelike.MapGenerator(_mapWidth, _mapHeight);
+            DungeonMap = mapGenerator.CreateMap();
+            DungeonMap.UpdatePlayerFieldOfView();
+
             // Set up a handler for RLnet's Update event.
             _rootConsole.Update += OnRootConsoleUpdate;
             // Set up a handler for RLNet's Render event.
@@ -53,23 +68,15 @@ namespace RS_Roguelike
         // Event handler for RLNet's Update event.
         private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
-            // Set background colour and text for each console so that we can verify they are in the correct positions.
-            _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, Colors.FloorBackground);
-            _mapConsole.Print(1, 1, "Map", Colors.TextHeading);
 
-            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater);
-            _messageConsole.Print(1, 1, "Messages", Colors.TextHeading);
-
-            _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Swatch.DbOldStone);
-            _statConsole.Print(1, 1, "Stats", Colors.TextHeading);
-
-            _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Swatch.DbWood);
-            _inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
         }
 
         // Event handler for RLNet's Render event.
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
+            DungeonMap.Draw(_mapConsole);
+            Player.Draw(_mapConsole, DungeonMap);
+
             // Blit the sub consoles to the rooot console in the correct locations.
             RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight, _rootConsole, 0, _inventoryHeight);
 

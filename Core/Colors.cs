@@ -13,6 +13,9 @@ namespace RS_Roguelike
         public static RLColor WallBackgroundFov = Swatch.SecondaryDarker;
         public static RLColor WallFov = Swatch.SecondaryLighter;
 
+        public static RLColor Player = Swatch.DbLight;
+
         public static RLColor TextHeading = Swatch.DbLight;
+
     }
 }
