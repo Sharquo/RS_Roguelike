@@ -1,4 +1,6 @@
 ﻿using RLNET;
+using RogueSharp.Random;
+using System;
 
 namespace RS_Roguelike
 {
@@ -34,12 +36,20 @@ namespace RS_Roguelike
 
         public static DungeonMap DungeonMap { get; private set; }
 
+        // Singleton of IRandom used throughout the game when generating radnom numbers.
+        public static IRandom Random { get; private set; }
+
         public static void Main()
         {
+            // Establish the seed for the random number generator from the current time.
+            int seed = (int)DateTime.UtcNow.Ticks;
+            Random = new DotNetRandom(seed);
+
+            // The title will appear at the top of the console window also inclues the seed used to generate the level.
+            string consoleTitle = $"RS_Roguelike - Seed {seed}";
+
             // This must be the exact name of the bitmap font file we are using or it will error.
             string fontFileName = "terminal8x8.png";
-            // The title will appear at the top of the console window.
-            string consoleTitle = "RS_Roguelike";
             // Tell RLNet to use the bitmap font file that we specified and that each tile is 8 x 8 pixels.
             _rootConsole = new RLRootConsole(fontFileName, _screenWidth, _screenHeight, 8, 8, 1f, consoleTitle);
 
@@ -56,7 +66,7 @@ namespace RS_Roguelike
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Swatch.DbWood);
 
             Player = new Player();
-            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13, 7);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
 
