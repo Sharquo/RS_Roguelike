@@ -1,8 +1,9 @@
 ﻿using RogueSharp;
 using System.Linq;
 using System;
+using RS_Roguelike.Core;
 
-namespace RS_Roguelike
+namespace RS_Roguelike.Systems
 {
     public class MapGenerator
     {
@@ -103,7 +104,7 @@ namespace RS_Roguelike
             Player player = Game.Player;
             if(player == null)
             {
-                player = new RS_Roguelike.Player();
+                player = new Player();
             }
 
             player.X = _map.Rooms[0].Center.X;

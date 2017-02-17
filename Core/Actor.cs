@@ -1,7 +1,8 @@
 ﻿using RLNET;
 using RogueSharp;
+using RS_Roguelike.Interfaces;
 
-namespace RS_Roguelike
+namespace RS_Roguelike.Core
 {
     public class Actor : IActor, IDrawable
     {

@@ -1,4 +1,4 @@
-﻿namespace RS_Roguelike
+﻿namespace RS_Roguelike.Core
 {
     // Direction values correspond with numpad numbers.
     public enum Direction

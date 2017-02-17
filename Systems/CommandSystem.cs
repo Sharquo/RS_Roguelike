@@ -1,4 +1,6 @@
-﻿namespace RS_Roguelike
+﻿using RS_Roguelike.Core;
+
+namespace RS_Roguelike.Systems
 {
     public class CommandSystem
     {

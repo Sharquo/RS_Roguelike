@@ -1,7 +1,7 @@
 ﻿using RLNET;
 using RogueSharp;
 
-namespace RS_Roguelike
+namespace RS_Roguelike.Interfaces
 {
     public interface IDrawable
     {

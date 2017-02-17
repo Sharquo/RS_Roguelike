@@ -2,7 +2,7 @@
 using RogueSharp;
 using System.Collections.Generic;
 
-namespace RS_Roguelike
+namespace RS_Roguelike.Core
 {
     // Our custom DungeonMap class extends the base RogueSharp Map class.
     public class DungeonMap : Map

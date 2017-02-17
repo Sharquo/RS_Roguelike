@@ -1,5 +1,6 @@
 ﻿using RLNET;
-namespace RS_Roguelike
+
+namespace RS_Roguelike.Core
 {
     class Colors
     {

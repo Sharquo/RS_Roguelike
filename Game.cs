@@ -1,5 +1,7 @@
 ﻿using RLNET;
 using RogueSharp.Random;
+using RS_Roguelike.Core;
+using RS_Roguelike.Systems;
 using System;
 
 namespace RS_Roguelike
@@ -36,6 +38,8 @@ namespace RS_Roguelike
 
         public static DungeonMap DungeonMap { get; private set; }
 
+        public static MessageLog MessageLog { get; private set; }
+
         // Singleton of IRandom used throughout the game when generating radnom numbers.
         public static IRandom Random { get; private set; }
 
@@ -61,7 +65,7 @@ namespace RS_Roguelike
 
             // Set background colour for each console.
             _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, Colors.FloorBackground);
-            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater);
+//            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater);
             _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Swatch.DbOldStone);
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Swatch.DbWood);
 
@@ -70,6 +74,11 @@ namespace RS_Roguelike
             DungeonMap.UpdatePlayerFieldOfView();
 
             CommandSystem = new CommandSystem();
+
+            // Create a new MessageLog and print the random seed used to generate the level.
+            MessageLog = new MessageLog();
+            MessageLog.Add("I AM CHAD!  LOOK UPON ME AND TREMBLE!");
+            MessageLog.Add($"Level created with seed '{seed}'");
 
             // Set up a handler for RLnet's Update event.
             _rootConsole.Update += OnRootConsoleUpdate;
@@ -127,6 +136,7 @@ namespace RS_Roguelike
             {
                 DungeonMap.Draw(_mapConsole);
                 Player.Draw(_mapConsole, DungeonMap);
+                MessageLog.Draw(_messageConsole);
 
                 // Blit the sub consoles to the rooot console in the correct locations.
                 RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight, _rootConsole, 0, _inventoryHeight);
