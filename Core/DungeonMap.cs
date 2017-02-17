@@ -15,6 +15,14 @@ namespace RS_Roguelike
             Rooms = new List<Rectangle>();
         }
 
+        // Called by MapGenerator after we generate a new map.  It adds the player to the map.
+        public void AddPlayer(Player player)
+        {
+            Game.Player = player;
+            SetIsWalkable(player.X, player.Y, false);
+            UpdatePlayerFieldOfView();
+        }
+
         // The Draw method will be called each time that the map is updated.
         // It will render all of the symbols/colours for each cell to the map sub-console.
         public void Draw(RLConsole mapConsole)
