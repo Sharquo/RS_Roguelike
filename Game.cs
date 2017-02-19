@@ -136,6 +136,7 @@ namespace RS_Roguelike
             {
                 DungeonMap.Draw(_mapConsole);
                 Player.Draw(_mapConsole, DungeonMap);
+                Player.DrawStats(_statConsole);
                 MessageLog.Draw(_messageConsole);
 
                 // Blit the sub consoles to the rooot console in the correct locations.
