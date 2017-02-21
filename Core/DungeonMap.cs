@@ -1,6 +1,7 @@
 ﻿using RLNET;
 using RogueSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RS_Roguelike.Core
 {
@@ -77,6 +78,18 @@ namespace RS_Roguelike.Core
             SetIsWalkable(monster.X, monster.Y, false);
         }
 
+        public void RemoveMonster(Monster monster)
+        {
+            _monsters.Remove(monster);
+            // After removing the monster from the map, make sure the cell is walkable again.
+            SetIsWalkable(monster.X, monster.Y, true);
+        }
+
+        public Monster GetMonsterAt(int x, int y)
+        {
+            return _monsters.FirstOrDefault(m => m.X == x && m.Y == y);
+        }
+
         // A helper method for setting the IsWalkable property on a cell.
         public void SetIsWalkable(int x, int y, bool isWalkable)
         {
@@ -122,18 +135,27 @@ namespace RS_Roguelike.Core
 
         // The Draw method will be called each time that the map is updated.
         // It will render all of the symbols/colours for each cell to the map sub-console.
-        public void Draw(RLConsole mapConsole)
+        public void Draw(RLConsole mapConsole, RLConsole statConsole)
         {
-            mapConsole.Clear();
             foreach (Cell cell in GetAllCells())
             {
                 SetConsoleSymbolForCell(mapConsole, cell);
             }
 
+            // Keep an index so we know which position to draw monster stats at.
+            int i = 0;
+
             // Iteracte through each monster on the map and draw it aftger drawing the Cells.
             foreach (Monster monster in _monsters)
             {
-                monster.Draw(mapConsole, this);
+                if (IsInFov(monster.X, monster.Y))
+                {
+                    monster.Draw(mapConsole, this);
+
+                    // Pass in the index to DrawStats and increment it afterwards.
+                    monster.DrawStats(statConsole, i);
+                    i++;
+                }
             }
         }
 
