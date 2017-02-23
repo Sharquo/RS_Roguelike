@@ -16,6 +16,18 @@ namespace RS_Roguelike.Systems
         }
 
         // Add a new object to the schedule.
+        // Place it at the current time plus the object's Time property.
+        public void Add(IScheduleable scheduleable)
+        {
+            int key = _time + scheduleable.Time;
+            if(!_scheduleables.ContainsKey(key))
+            {
+                _scheduleables.Add(key, new List<IScheduleable>());
+            }
+            _scheduleables[key].Add(scheduleable);
+        }
+
+        //Remove a specific object from the schedule.
         // Useful for when a monster is killed - remove it before its action comes up again.
         public void Remove(IScheduleable scheduleable)
         {

@@ -1,10 +1,14 @@
 ﻿using RLNET;
+using RS_Roguelike.Behaviors;
+using RS_Roguelike.Systems;
 using System;
 
 namespace RS_Roguelike.Core
 {
     public class Monster : Actor
     {
+        public int? TurnsAlerted { get; set; }
+
         public void DrawStats(RLConsole statConsole, int position)
         {
             // Start at Y=13 which is below the player stats.
@@ -25,5 +29,12 @@ namespace RS_Roguelike.Core
             // Print the monster's name over the top of the health bar.
             statConsole.Print(2, yPosition, $": {Name}", Swatch.DbLight);
         }
+
+        public virtual void PerformAction(CommandSystem commandSystem)
+        {
+            var behavior = new StandardMoveAndAttack();
+            behavior.Act(this, commandSystem);
+        }
+
     }
 }

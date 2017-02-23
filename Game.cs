@@ -40,6 +40,8 @@ namespace RS_Roguelike
 
         public static MessageLog MessageLog { get; private set; }
 
+        public static SchedulingSystem SchedulingSystem { get; private set; }
+
         // Singleton of IRandom used throughout the game when generating radnom numbers.
         public static IRandom Random { get; private set; }
 
@@ -69,11 +71,12 @@ namespace RS_Roguelike
             _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Swatch.DbOldStone);
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Swatch.DbWood);
 
+            SchedulingSystem = new SchedulingSystem();
+            CommandSystem = new CommandSystem();
+
             MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13, 7);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
-
-            CommandSystem = new CommandSystem();
 
             // Create a new MessageLog and print the random seed used to generate the level.
             MessageLog = new MessageLog();
@@ -94,36 +97,45 @@ namespace RS_Roguelike
             bool didPlayerAct = false;
             RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
 
-            if(keyPress != null)
+            if (CommandSystem.IsPlayerTurn)
             {
-                if(keyPress.Key == RLKey.Up)
-                {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
-                }
+                 if (keyPress != null)
+                 {
+                        if (keyPress.Key == RLKey.Up)
+                        {
+                            didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
+                        }
 
-                else if (keyPress.Key == RLKey.Down)
-                {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
-                }
+                        else if (keyPress.Key == RLKey.Down)
+                        {
+                            didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
+                        }
 
-                else if (keyPress.Key == RLKey.Left)
-                {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
-                }
+                        else if (keyPress.Key == RLKey.Left)
+                        {
+                            didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
+                        }
+                        
+                        else if (keyPress.Key == RLKey.Right)
+                        {
+                            didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
+                        }
 
-                else if (keyPress.Key == RLKey.Right)
-                {
-                    didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
-                }
+                        else if (keyPress.Key == RLKey.Escape)
+                        {
+                            _rootConsole.Close();
+                        }
+                    }
 
-                else if (keyPress.Key == RLKey.Escape)
+                if (didPlayerAct)
                 {
-                    _rootConsole.Close();
+                    _renderRequired = true;
+                    CommandSystem.EndPlayerTurn();
                 }
             }
-
-            if(didPlayerAct)
+            else
             {
+                CommandSystem.ActivateMonsters();
                 _renderRequired = true;
             }
         }

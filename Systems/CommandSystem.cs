@@ -1,11 +1,15 @@
-﻿using RogueSharp.DiceNotation;
+﻿using RogueSharp;
+using RogueSharp.DiceNotation;
 using RS_Roguelike.Core;
+using RS_Roguelike.Interfaces;
 using System.Text;
 
 namespace RS_Roguelike.Systems
 {
     public class CommandSystem
     {
+        public bool IsPlayerTurn { get; set; }
+
         // Return the value as true if the player was able to move and false when the player couldn't move.
         public bool MovePlayer(Direction direction)
         {
@@ -54,6 +58,44 @@ namespace RS_Roguelike.Systems
             }
             return false;
 
+        }
+
+        public void EndPlayerTurn()
+        {
+            IsPlayerTurn = false;
+        }
+
+        public void ActivateMonsters()
+        {
+            IScheduleable scheduleable = Game.SchedulingSystem.Get();
+            if (scheduleable is Player)
+            {
+                IsPlayerTurn = true;
+                Game.SchedulingSystem.Add(Game.Player);
+            }
+            else
+            {
+                Monster monster = scheduleable as Monster;
+
+                if (monster != null)
+                {
+                    monster.PerformAction(this);
+                    Game.SchedulingSystem.Add(monster);
+                }
+
+                ActivateMonsters();
+            }
+        }
+
+        public void MoveMonster(Monster monster, Cell cell)
+        {
+            if (!Game.DungeonMap.SetActorPosition(monster, cell.X, cell.Y))
+            {
+                if (Game.Player.X == cell.X && Game.Player.Y == cell.Y)
+                {
+                    Attack(monster, Game.Player);
+                }
+            }
         }
 
         public void Attack(Actor attacker, Actor defender)
