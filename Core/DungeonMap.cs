@@ -148,7 +148,7 @@ namespace RS_Roguelike.Core
             // Keep an index so we know which position to draw monster stats at.
             int i = 0;
 
-            // Iteracte through each monster on the map and draw it aftger drawing the Cells.
+            // Iteracte through each monster on the map and draw it after drawing the Cells.
             foreach (Monster monster in _monsters)
             {
                 if (IsInFov(monster.X, monster.Y))
@@ -188,13 +188,17 @@ namespace RS_Roguelike.Core
             // When a cell is outside the field-of-view, draw it with darker colours.
             else
             {
-                if (cell.IsWalkable)
+                if (!cell.IsWalkable)
+                {
+                    console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
+                }
+                if (_monsters.Any())
                 {
                     console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.');
                 }
                 else
                 {
-                    console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
+                    console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.');
                 }
             }
         }
