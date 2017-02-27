@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\StandardMoveAndAttack.cs" />
+    <Compile Include="Consoles\InventoryPanel.cs" />
     <Compile Include="Consoles\MapPanel.cs" />
     <Compile Include="Consoles\MessagePanel.cs" />
     <Compile Include="Consoles\StatusPanel.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\Swatch.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameWorld.cs" />
     <Compile Include="Interfaces\IActor.cs" />
     <Compile Include="Interfaces\IBehavior.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />

@@ -109,7 +109,11 @@ namespace RS_Roguelike
 
         private static void Engine_Start(object sender, EventArgs e)
         {
+            // Clear the default console.
+            SadConsole.Engine.ConsoleRenderStack.Clear();
+            SadConsole.Engine.ActiveConsole = null;
 
+            GameWorld.Start();
         }
 
         private static void Engine_Update(object sender, EventArgs e)
