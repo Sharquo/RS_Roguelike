@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{1B3CBE7E-06D7-4EC8-AAF3-8034B5F147B8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>ConsoleApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -36,8 +36,15 @@
   <PropertyGroup>
     <RootNamespace>RS_Roguelike</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RS_Roguelike.Game</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenTK">
       <HintPath>packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
     </Reference>
@@ -46,6 +53,10 @@
     </Reference>
     <Reference Include="RogueSharp">
       <HintPath>packages\RogueSharp.3.0.0\lib\portable-net40+sl50+win+wpa81+wp80\RogueSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SadConsole.Core.Windows, Version=5.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SadConsole.Core.5.2.3\lib\net45\SadConsole.Core.Windows.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,20 +67,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="tiledfont.png">
+    <Content Include="Cheepicus_12x12.png" />
+    <Content Include="IBM8x16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Yayo_c64.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="C64.font" />
+    <None Include="Cheepicus12.font" />
+    <None Include="IBM.font">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\StandardMoveAndAttack.cs" />
+    <Compile Include="Consoles\MapPanel.cs" />
+    <Compile Include="Consoles\MessagePanel.cs" />
+    <Compile Include="Consoles\StatusPanel.cs" />
     <Compile Include="Core\Actor.cs" />
     <Compile Include="Core\Colors.cs" />
     <Compile Include="Core\Direction.cs" />

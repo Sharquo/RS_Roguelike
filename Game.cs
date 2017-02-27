@@ -3,11 +3,13 @@ using RogueSharp.Random;
 using RS_Roguelike.Core;
 using RS_Roguelike.Systems;
 using System;
+using Console = SadConsole.Consoles.Console;
 
 namespace RS_Roguelike
 {
     class Game
     {
+/*
         public static bool _renderRequired = true;
 
         public static CommandSystem CommandSystem { get; private set; }
@@ -44,9 +46,22 @@ namespace RS_Roguelike
 
         // Singleton of IRandom used throughout the game when generating radnom numbers.
         public static IRandom Random { get; private set; }
+*/
 
-        public static void Main()
+        public static void Main(string[] args)
         {
+            // Set up the engine and create the main window.
+            SadConsole.Engine.Initialize("IBM.font", 80, 25);
+
+            // Hook the start event so we can add consoles to the system.
+            SadConsole.Engine.EngineStart += Engine_Start;
+
+            // Hook the update event that happens each frame so we can trap keys and respond.
+            SadConsole.Engine.EngineUpdated += Engine_Update;
+
+            // Start the game.
+            SadConsole.Engine.Run();
+/*
             // Establish the seed for the random number generator from the current time.
             int seed = (int)DateTime.UtcNow.Ticks;
             Random = new DotNetRandom(seed);
@@ -67,7 +82,7 @@ namespace RS_Roguelike
 
             // Set background colour for each console.
             _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, Colors.FloorBackground);
-//            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater);
+            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater);
             _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Swatch.DbOldStone);
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Swatch.DbWood);
 
@@ -89,9 +104,21 @@ namespace RS_Roguelike
             _rootConsole.Update += OnRootConsoleRender;
             // Begin RLNet's game loop.
             _rootConsole.Run();
+*/
+        }
+
+        private static void Engine_Start(object sender, EventArgs e)
+        {
+
+        }
+
+        private static void Engine_Update(object sender, EventArgs e)
+        {
+
         }
 
         // Event handler for RLNet's Update event.
+/*
         private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
             bool didPlayerAct = false;
@@ -139,8 +166,9 @@ namespace RS_Roguelike
                 _renderRequired = true;
             }
         }
-
+*/
         // Event handler for RLNet's Render event.
+/*
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
             // Don't bother redrawing all of the consoles if nothing has changed.
@@ -170,5 +198,6 @@ namespace RS_Roguelike
                 _renderRequired = false;
             }
         }
+*/
     }
 }

@@ -6,6 +6,7 @@ using RogueSharp;
 
 namespace RS_Roguelike.Behaviors
 {
+/*
     public class StandardMoveAndAttack : IBehavior
     {
         public bool Act(Monster monster, CommandSystem commandSystem)
@@ -80,4 +81,5 @@ namespace RS_Roguelike.Behaviors
             return true;
         }
     }
+*/
 }

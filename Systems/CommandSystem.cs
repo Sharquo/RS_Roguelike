@@ -6,6 +6,7 @@ using System.Text;
 
 namespace RS_Roguelike.Systems
 {
+/*
     public class CommandSystem
     {
         public bool IsPlayerTurn { get; set; }
@@ -212,4 +213,5 @@ namespace RS_Roguelike.Systems
             }
         }
     }
+*/
 }

@@ -3,6 +3,7 @@ using RS_Roguelike.Core;
 
 namespace RS_Roguelike.Monsters
 {
+/*
     public class Kobold : Monster
     {
         public static Kobold Create(int level)
@@ -24,4 +25,5 @@ namespace RS_Roguelike.Monsters
             };
         }
     }
+*/
 }

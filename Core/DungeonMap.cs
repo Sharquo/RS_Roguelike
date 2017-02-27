@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace RS_Roguelike.Core
 {
+/*
     // Our custom DungeonMap class extends the base RogueSharp Map class.
     public class DungeonMap : Map
     {
@@ -203,4 +204,5 @@ namespace RS_Roguelike.Core
             }
         }
     }
+*/
 }

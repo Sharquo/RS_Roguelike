@@ -7,6 +7,7 @@ using RS_Roguelike.Monsters;
 
 namespace RS_Roguelike.Systems
 {
+/*
     public class MapGenerator
     {
         private readonly int _width;
@@ -162,4 +163,5 @@ namespace RS_Roguelike.Systems
             }
         }
     }
+*/
 }

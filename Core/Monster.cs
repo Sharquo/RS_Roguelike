@@ -5,6 +5,7 @@ using System;
 
 namespace RS_Roguelike.Core
 {
+/*
     public class Monster : Actor
     {
         public int? TurnsAlerted { get; set; }
@@ -37,4 +38,5 @@ namespace RS_Roguelike.Core
         }
 
     }
+*/
 }
