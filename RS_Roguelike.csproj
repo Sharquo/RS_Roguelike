@@ -67,21 +67,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="Cheepicus_12x12.png" />
+    <Content Include="Cheepicus_12x12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="IBM8x16.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Yayo_c64.png" />
+    <Content Include="Yayo_c64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="C64.font" />
-    <None Include="Cheepicus12.font" />
+    <None Include="C64.font">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Cheepicus12.font">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="IBM.font">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
@@ -89,7 +97,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\StandardMoveAndAttack.cs" />
     <Compile Include="Consoles\InventoryPanel.cs" />
-    <Compile Include="Consoles\MapPanel.cs" />
+    <Compile Include="Consoles\DungeonScreen.cs" />
     <Compile Include="Consoles\MessagePanel.cs" />
     <Compile Include="Consoles\StatusPanel.cs" />
     <Compile Include="Core\Actor.cs" />

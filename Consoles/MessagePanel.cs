@@ -1,12 +1,13 @@
 ﻿using SadConsole;
+using SadConsole.Consoles;
 
 namespace RS_Roguelike.Consoles
 {
     class MessagePanel : SadConsole.Consoles.Console
     {
-        public MessagePanel(int width, int height): base(width, height)
-        {
 
+        public MessagePanel(int width, int height) : base(width, height)
+        {
         }
 
         public void PrintMessage(string text)
@@ -20,6 +21,5 @@ namespace RS_Roguelike.Consoles
             ShiftDown(1);
             VirtualCursor.Print(text).CarriageReturn();
         }
-
     }
 }

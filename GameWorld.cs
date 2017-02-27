@@ -8,16 +8,16 @@ namespace RS_Roguelike
 {
     static class GameWorld
     {
-        public static Consoles.MapPanel MapPanel;
+        public static Consoles.DungeonScreen DungeonScreen;
 
         /// <summary>
         /// Called one time to initiate everything.  Assumes SadConsole has been set up and is ready to go.
         /// </summary>
         public static void Start()
         {
-            MapPanel = new Consoles.MapPanel();
-            SadConsole.Engine.ConsoleRenderStack.Add(MapPanel);
-            MapPanel.MessageConsole.PrintMessage("SomeBODY once told me ...");
+            DungeonScreen = new Consoles.DungeonScreen();
+            SadConsole.Engine.ConsoleRenderStack.Add(DungeonScreen);
+            DungeonScreen.MessageConsole.PrintMessage("SomeBODY once told me ...");
         }
     }
 }

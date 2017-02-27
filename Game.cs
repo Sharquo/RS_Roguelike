@@ -13,7 +13,7 @@ namespace RS_Roguelike
         public static bool _renderRequired = true;
 
         public static CommandSystem CommandSystem { get; private set; }
-        // The screen height and width are in the nuumber of tiles.
+        // The screen height and width are in the number of tiles.
         private static readonly int _screenWidth = 100;
         private static readonly int _screenHeight = 70;
         private static RLRootConsole _rootConsole;
