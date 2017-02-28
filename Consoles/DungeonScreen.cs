@@ -7,7 +7,7 @@ namespace RS_Roguelike.Consoles
 {
     class DungeonScreen : ConsoleList
     {
-        public Console ViewConsole;
+        public MapConsole ViewConsole;
         public StatusPanel StatsConsole;
         public MessagePanel MessageConsole;
         public InventoryPanel InventoryConsole;
@@ -15,8 +15,8 @@ namespace RS_Roguelike.Consoles
         private Console messageHeaderConsole;
 
         // The screen height and width are in the number of tiles. Not Used?
-//        private static readonly int _screenWidth = 80;
-//        private static readonly int _screenHeight = 24;
+        private static readonly int _screenWidth = 100;
+        private static readonly int _screenHeight = 100;
 
         // The map console takes up most of the screen and is where the map will be drawn.
         private static readonly int _mapWidth = 56;
@@ -39,7 +39,7 @@ namespace RS_Roguelike.Consoles
             InventoryConsole = new InventoryPanel("Inventory", _inventoryWidth, _inventoryHeight + 1);
             StatsConsole = new StatusPanel(_statWidth, _statHeight);
             MessageConsole = new MessagePanel(_messageWidth, _messageHeight);
-            ViewConsole = new Console(_mapWidth, _mapHeight);
+            ViewConsole = new MapConsole(_mapWidth, _mapHeight, _screenWidth, _screenHeight);
 //            InventoryConsole.FillWithRandomGarbage();
 
             // Setup the message header to be as wide as the screen but only 1 character high
