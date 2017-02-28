@@ -45,17 +45,15 @@
       <HintPath>packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="RLNET">
-      <HintPath>packages\RLNET.1.0.6\lib\RLNET.dll</HintPath>
-    </Reference>
     <Reference Include="RogueSharp">
       <HintPath>packages\RogueSharp.3.0.0\lib\portable-net40+sl50+win+wpa81+wp80\RogueSharp.dll</HintPath>
     </Reference>
     <Reference Include="SadConsole.Core.Windows, Version=5.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\SadConsole.Core.5.2.3\lib\net45\SadConsole.Core.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SadConsole.GameHelpers.Windows, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SadConsole.GameHelpers.4.5.0\lib\net45\SadConsole.GameHelpers.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -91,13 +89,13 @@
     <None Include="IBM.font">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\StandardMoveAndAttack.cs" />
     <Compile Include="Consoles\InventoryPanel.cs" />
     <Compile Include="Consoles\DungeonScreen.cs" />
+    <Compile Include="Consoles\MapConsole.cs" />
     <Compile Include="Consoles\MessagePanel.cs" />
     <Compile Include="Consoles\StatusPanel.cs" />
     <Compile Include="Core\Actor.cs" />
@@ -119,6 +117,7 @@
     <Compile Include="Systems\MapGenerator.cs" />
     <Compile Include="Systems\MessageLog.cs" />
     <Compile Include="Systems\SchedulingSystem.cs" />
+    <Compile Include="Utils\ConsoleBorders.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".git\" />

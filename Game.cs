@@ -1,9 +1,4 @@
-﻿using RLNET;
-using RogueSharp.Random;
-using RS_Roguelike.Core;
-using RS_Roguelike.Systems;
-using System;
-using Console = SadConsole.Consoles.Console;
+﻿using System;
 
 namespace RS_Roguelike
 {

@@ -36,7 +36,7 @@ namespace RS_Roguelike.Consoles
 
         public DungeonScreen()
         {
-            InventoryConsole = new InventoryPanel("Inventory",_inventoryWidth, _inventoryHeight + 1);
+            InventoryConsole = new InventoryPanel("Inventory", _inventoryWidth, _inventoryHeight + 1);
             StatsConsole = new StatusPanel(_statWidth, _statHeight);
             MessageConsole = new MessagePanel(_messageWidth, _messageHeight);
             ViewConsole = new Console(_mapWidth, _mapHeight);

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using SadConsole.Consoles;
+using RS_Roguelike.Utils;
 using System;
 
 namespace RS_Roguelike.Consoles
@@ -28,17 +28,12 @@ namespace RS_Roguelike.Consoles
         public StatusPanel(int width, int height) : base(width, height)
         {
             // Draw the side bar
-            SadConsole.Shapes.Line line = new SadConsole.Shapes.Line();
-            line.EndingLocation = new Point(0, height - 1);
-            line.CellAppearance.GlyphIndex = 179;
-            line.UseEndingCell = false;
-            line.UseStartingCell = false;
-            line.Draw(this);
+            ConsoleBorders.DrawBar(0, 0, 0, height - 1, 179, this);
         }
 
         private void RedrawPanel()
         {
-            Print(2, 2, characterName);
+            Print(2, 1, characterName);
 
             // Create a colored string that looks like 180/200
             SadConsole.ColoredString healthStatus = health.ToString().CreateColored(Color.LightGreen, Color.Black, null) +
@@ -46,7 +41,7 @@ namespace RS_Roguelike.Consoles
                                                     maxHealth.ToString().CreateColored(Color.DarkGreen, Color.Black, null);
 
             // Align the string to the right side of the console
-            Print(Width - 2 - healthStatus.ToString().Length, 2, healthStatus);
+            Print(Width - 2 - healthStatus.ToString().Length, 1, healthStatus);
         }
     }
 }
