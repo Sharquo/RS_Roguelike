@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using SadConsole.Consoles;
-using Console = SadConsole.Consoles.Console;
+using SadConsole.Input;
 using System;
+using Console = SadConsole.Consoles.Console;
 
 namespace RS_Roguelike.Consoles
 {
@@ -40,7 +41,7 @@ namespace RS_Roguelike.Consoles
             StatsConsole = new StatusPanel(_statWidth, _statHeight);
             MessageConsole = new MessagePanel(_messageWidth, _messageHeight);
             ViewConsole = new MapConsole(_mapWidth, _mapHeight, _screenWidth, _screenHeight);
-//            InventoryConsole.FillWithRandomGarbage();
+            //            InventoryConsole.FillWithRandomGarbage();
 
             // Setup the message header to be as wide as the screen but only 1 character high
             messageHeaderConsole = new Console(_messageWidth + 1, 1);
@@ -71,6 +72,33 @@ namespace RS_Roguelike.Consoles
             StatsConsole.CharacterName = "Character";
             StatsConsole.MaxHealth = 200;
             StatsConsole.Health = 180;
+
+            SadConsole.Engine.ActiveConsole = this;
+
+            // Keyboard stuff
+            SadConsole.Engine.Keyboard.RepeatDelay = 0.07f;
+            SadConsole.Engine.Keyboard.InitialRepeatDelay = 0.1f;
+        }
+
+        public override bool ProcessKeyboard(KeyboardInfo info)
+        {
+            if(info.KeysPressed.Contains(AsciiKey.Get(Microsoft.Xna.Framework.Input.Keys.Down)))
+            {
+                ViewConsole.MovePlayerBy(new Point(0, 1));
+            }
+            else if (info.KeysPressed.Contains(AsciiKey.Get(Microsoft.Xna.Framework.Input.Keys.Up)))
+            {
+                ViewConsole.MovePlayerBy(new Point(0, -1));
+            }
+            else if (info.KeysPressed.Contains(AsciiKey.Get(Microsoft.Xna.Framework.Input.Keys.Right)))
+            {
+                ViewConsole.MovePlayerBy(new Point(1, 0));
+            }
+            else if (info.KeysPressed.Contains(AsciiKey.Get(Microsoft.Xna.Framework.Input.Keys.Left)))
+            {
+                ViewConsole.MovePlayerBy(new Point(-1, 0));
+            }
+            return false;
         }
     }
 }
