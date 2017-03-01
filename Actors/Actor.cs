@@ -1,7 +1,8 @@
-﻿namespace RS_Roguelike.Core
+﻿using RS_Roguelike.Interfaces;
+
+namespace RS_Roguelike.Actors
 {
-    /*
-        public class Actor : IActor, IDrawable, IScheduleable
+        public class Actor : IActor
         {
             // IActor
             private int _attack;
@@ -134,7 +135,7 @@
                     _speed = value;
                 }
             }
-
+/*
             // IDrawable
             public RLColor Color { get; set; }
             public char Symbol { get; set; }
@@ -159,7 +160,8 @@
                     console.Set(X, Y, Colors.Floor, Colors.FloorBackground, '.');
                 }
             }
-
+*/
+/*
             // IScheduleable
             public int Time
             {
@@ -168,6 +170,6 @@
                     return Speed;
                 }
             }
+*/
         }
-    */
 }

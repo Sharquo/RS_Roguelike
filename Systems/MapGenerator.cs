@@ -3,7 +3,7 @@ using System.Linq;
 using System;
 using RS_Roguelike.Core;
 using RogueSharp.DiceNotation;
-using RS_Roguelike.Monsters;
+using RS_Roguelike.Actors.Monsters;
 
 namespace RS_Roguelike.Systems
 {

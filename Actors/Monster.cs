@@ -1,4 +1,4 @@
-﻿namespace RS_Roguelike.Core
+﻿namespace RS_Roguelike.Actors
 {
     /*
         public class Monster : Actor
