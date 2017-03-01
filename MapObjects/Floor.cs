@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
-using SadConsole;
 
 namespace RS_Roguelike.MapObjects
 {
-    public class Floor : CellAppearance
+    public class Floor : MapObjectBase
     {
         public Floor() : base(Color.DarkGray, Color.Transparent, 46)
         {
