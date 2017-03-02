@@ -9,7 +9,7 @@ namespace RS_Roguelike.Consoles
     class DungeonScreen : ConsoleList
     {
         public MapConsole ViewConsole;
-        public StatusPanel StatsConsole;
+        public StatsConsole StatsConsole;
         public MessagePanel MessageConsole;
         public InventoryPanel InventoryConsole;
 
@@ -38,7 +38,7 @@ namespace RS_Roguelike.Consoles
         public DungeonScreen()
         {
             InventoryConsole = new InventoryPanel("Inventory", _inventoryWidth, _inventoryHeight + 1);
-            StatsConsole = new StatusPanel(_statWidth, _statHeight);
+            StatsConsole = new StatsConsole(_statWidth, _statHeight);
             MessageConsole = new MessagePanel(_messageWidth, _messageHeight);
             ViewConsole = new MapConsole(_mapWidth, _mapHeight, _screenWidth, _screenHeight);
             //            InventoryConsole.FillWithRandomGarbage();
@@ -67,11 +67,6 @@ namespace RS_Roguelike.Consoles
             Add(ViewConsole);
             Add(MessageConsole);
             Add(InventoryConsole);
-
-            // Placeholder stuff for the stats screen
-            StatsConsole.CharacterName = "Character";
-            StatsConsole.MaxHealth = 200;
-            StatsConsole.Health = 180;
 
             SadConsole.Engine.ActiveConsole = this;
 

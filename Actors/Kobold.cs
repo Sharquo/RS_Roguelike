@@ -1,7 +1,7 @@
 ﻿using RogueSharp.DiceNotation;
 using RS_Roguelike.Core;
 
-namespace RS_Roguelike.Actors.Monsters
+namespace RS_Roguelike.Actors
 {
 /*
     public class Kobold : Monster

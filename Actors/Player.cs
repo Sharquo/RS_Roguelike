@@ -1,32 +1,34 @@
-﻿namespace RS_Roguelike.Actors
-{
-    /*
-        public class Player : Actor
-        {
-            public Player()
-            {
-                Attack = 2;
-                AttackChance = 50;
-                Awareness = 15;
-                Color = Colors.Player;
-                Defense = 2;
-                DefenseChance = 40;
-                Gold = 0;
-                Health = 100;
-                MaxHealth = 100;
-                Name = "Chad";
-                Speed = 10;
-                Symbol = '@';
-            }
+﻿using RS_Roguelike.Utils;
+using SadConsole;
+using SadConsole.Consoles;
+using Microsoft.Xna.Framework;
 
-            public void DrawStats (RLConsole statConsole)
-            {
-                statConsole.Print(1, 1, $"Name: {Name}", Colors.Text);
-                statConsole.Print(1, 3, $"Health: {Health}/{MaxHealth}", Colors.Text);
-                statConsole.Print(1, 5, $"Attack:   {Attack} ({AttackChance}%)", Colors.Text);
-                statConsole.Print(1, 7, $"Defense:  {Defense} ({DefenseChance}%)", Colors.Text);
-                statConsole.Print(1, 9, $"Gold: {Gold}", Colors.Gold);
-            }
+namespace RS_Roguelike.Actors
+{
+    public class Player : Actor
+    {
+        public Player() : base(Engine.DefaultFont)
+        {
+            AnimatedTextSurface anim = new AnimatedTextSurface("default", 1, 1, Engine.DefaultFont);
+            anim.CreateFrame();
+            anim.CurrentFrame[0].Foreground = Colors.Player;
+            anim.CurrentFrame[0].GlyphIndex = 64;
+
+            Animation = anim;
+            Position = new Point(1, 1);
+
+            // Set the stats
+            Attack = 2;
+            AttackChance = 50;
+            Awareness = 15;
+            Defense = 2;
+            DefenseChance = 40;
+            Gold = 0;
+            Health = 100;
+            MaxHealth = 100;
+            Name = "Chad";
+            Speed = 10;
         }
-    */
+
+    }
 }
