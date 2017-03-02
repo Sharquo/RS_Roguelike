@@ -12,6 +12,8 @@ namespace RS_Roguelike.Consoles
         RogueSharp.Map rogueMap;
         RogueSharp.FieldOfView rogueFOV;
         MapObjects.MapObjectBase[,] mapData;
+
+        protected List<Monster> _monsters;
         public Player Player { get; private set; }
 
         IReadOnlyCollection<RogueSharp.Cell> previousFOV = new List<RogueSharp.Cell>();
@@ -82,7 +84,7 @@ namespace RS_Roguelike.Consoles
 
         public override void Render()
         {
-            GameWorld.DungeonScreen.StatsConsole.DrawStats(Player);
+            GameWorld.DungeonScreen.StatsConsole.DrawPlayerStats(Player);
             Player.Render();
 
             base.Render();
@@ -94,6 +96,19 @@ namespace RS_Roguelike.Consoles
             Player.Update();
         }
 
+        private void AddMonster(Monster monster)
+        {
+
+            _monsters.Add(monster);
+//            Game.SchedulingSystem.Add(monster);
+        }
+
+        public void RemoveMonster(Monster monster)
+        {
+            _monsters.Remove(monster);
+//            Game.SchedulingSystem.Remove(monster);
+        }
+        
         public void MovePlayerBy(Point amount)
         {
             // Get the position the player will be at

@@ -20,20 +20,20 @@ namespace RS_Roguelike.Consoles
         private static readonly int _screenHeight = 100;
 
         // The map console takes up most of the screen and is where the map will be drawn.
-        private static readonly int _mapWidth = 56;
-        private static readonly int _mapHeight = 17;
+        private static readonly int _mapWidth = 112;
+        private static readonly int _mapHeight = 34;
 
         // Below the map console is the mesage console which displays attack rolls and other information.
-        private static readonly int _messageWidth = 56;
-        private static readonly int _messageHeight = 6;
+        private static readonly int _messageWidth = 112;
+        private static readonly int _messageHeight = 12;
 
         // The stat console is to the right of the map and displays player and monster stats.
-        private static readonly int _statWidth = 24;
-        private static readonly int _statHeight = 10;
+        private static readonly int _statWidth = 48;
+        private static readonly int _statHeight = 20;
 
         // Above the map is the inventory console which shows players equipment, abilites, and items.
-        private static readonly int _inventoryWidth = 24;
-        private static readonly int _inventoryHeight = 14;
+        private static readonly int _inventoryWidth = 48;
+        private static readonly int _inventoryHeight = 28;
 
         public DungeonScreen()
         {
@@ -56,10 +56,10 @@ namespace RS_Roguelike.Consoles
             messageHeaderConsole.Print(2, 0, " Messages ");
 
             // Move the rest of the consoles  into position (ViewConsole is already in position at 0).
-            InventoryConsole.Position = new Point(56, _statHeight);
-            StatsConsole.Position = new Point(56, 0);
-            MessageConsole.Position = new Point(0, 18);
-            messageHeaderConsole.Position = new Point(0, 17);
+            InventoryConsole.Position = new Point(112, _statHeight);
+            StatsConsole.Position = new Point(112, 0);
+            MessageConsole.Position = new Point(0, 36);
+            messageHeaderConsole.Position = new Point(0, 34);
 
             // Add all consoles to this console list.
             Add(messageHeaderConsole);
