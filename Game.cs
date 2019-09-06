@@ -46,7 +46,7 @@ namespace RS_Roguelike
         public static void Main(string[] args)
         {
             // Set up the engine and create the main window.
-            SadConsole.Engine.Initialize("Fonts/IBM.font", 80, 25);
+            SadConsole.Engine.Initialize("Fonts/IBM.font", 160, 48);
 
             // Hook the start event so we can add consoles to the system.
             SadConsole.Engine.EngineStart += Engine_Start;
