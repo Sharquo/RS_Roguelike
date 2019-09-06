@@ -3,33 +3,25 @@ using Microsoft.Xna.Framework;
 using SadConsole.Game;
 using SadConsole.Consoles;
 using System.Collections.Generic;
+using RS_Roguelike.Actors;
 
 namespace RS_Roguelike.Consoles
 {
-    class MapConsole : SadConsole.Consoles.Console
+    public class MapConsole : SadConsole.Consoles.Console
     {
         RogueSharp.Map rogueMap;
         RogueSharp.FieldOfView rogueFOV;
-        GameObject playerEntity;
         MapObjects.MapObjectBase[,] mapData;
-        IReadOnlyCollection<RogueSharp.Cell> previousFOV = new List<RogueSharp.Cell>();
 
-        public GameObject Player { get { return playerEntity; } }
+        protected List<Monster> _monsters;
+        public Player Player { get; private set; }
+
+        IReadOnlyCollection<RogueSharp.Cell> previousFOV = new List<RogueSharp.Cell>();
 
         public MapConsole(int viewWidth, int viewHeight, int mapWidth, int mapHeight) : base(mapWidth, mapHeight)
         {
             TextSurface.RenderArea = new Rectangle(0, 0, viewWidth, viewHeight);
-
-            AnimatedTextSurface playerAnimation = new AnimatedTextSurface("default", 1, 1, Engine.DefaultFont);
-            playerAnimation.CreateFrame();
-            playerAnimation.CurrentFrame[0].Foreground = Color.Orange;
-            playerAnimation.CurrentFrame[0].GlyphIndex = '@';
-
-            playerEntity = new GameObject(Engine.DefaultFont);
-            playerEntity.Animation = playerAnimation;
-
-            playerEntity.Position = new Point(1, 1);
-
+            Player = new Player();
             GenerateMap();
         }
 
@@ -76,14 +68,14 @@ namespace RS_Roguelike.Consoles
                 int y = random.Next(Height - 1);
                 if (rogueMap.IsWalkable(x, y))
                 {
-                    playerEntity.Position = new Point(x, y);
+                    Player.Position = new Point(x, y);
 
                     // Center the view area.
-                    TextSurface.RenderArea = new Rectangle(playerEntity.Position.X - (TextSurface.RenderArea.Width / 2),
-                        playerEntity.Position.Y - (TextSurface.RenderArea.Height / 2),
+                    TextSurface.RenderArea = new Rectangle(Player.Position.X - (TextSurface.RenderArea.Width / 2),
+                        Player.Position.Y - (TextSurface.RenderArea.Height / 2),
                         TextSurface.RenderArea.Width, TextSurface.RenderArea.Height);
 
-                    playerEntity.RenderOffset = this.Position - TextSurface.RenderArea.Location;
+                    Player.RenderOffset = this.Position - TextSurface.RenderArea.Location;
 
                     break;
                 }
@@ -92,35 +84,50 @@ namespace RS_Roguelike.Consoles
 
         public override void Render()
         {
+            GameWorld.DungeonScreen.StatsConsole.DrawPlayerStats(Player);
+            Player.Render();
+
             base.Render();
-            playerEntity.Render();
         }
 
         public override void Update()
         {
             base.Update();
-            playerEntity.Update();
+            Player.Update();
         }
 
+        private void AddMonster(Monster monster)
+        {
+
+            _monsters.Add(monster);
+//            Game.SchedulingSystem.Add(monster);
+        }
+
+        public void RemoveMonster(Monster monster)
+        {
+            _monsters.Remove(monster);
+//            Game.SchedulingSystem.Remove(monster);
+        }
+        
         public void MovePlayerBy(Point amount)
         {
             // Get the position the player will be at
-            Point newPosition = playerEntity.Position + amount;
+            Point newPosition = Player.Position + amount;
 
             // Check to see if the position is within the map
             if (new Rectangle(0, 0, Width, Height).Contains(newPosition)
                 && rogueMap.IsWalkable(newPosition.X, newPosition.Y))
             {
                 // Move the player
-                playerEntity.Position += amount;
+                Player.Position += amount;
 
                 // Scroll the view area to center the player on the screen
-                TextSurface.RenderArea = new Rectangle(playerEntity.Position.X - (TextSurface.RenderArea.Width / 2),
-                                                       playerEntity.Position.Y - (TextSurface.RenderArea.Height / 2),
+                TextSurface.RenderArea = new Rectangle(Player.Position.X - (TextSurface.RenderArea.Width / 2),
+                                                       Player.Position.Y - (TextSurface.RenderArea.Height / 2),
                                                        TextSurface.RenderArea.Width, TextSurface.RenderArea.Height);
 
                 // If he view area moved, we'll keep our entity in sync with it.
-                playerEntity.RenderOffset = this.Position - TextSurface.RenderArea.Location;
+                Player.RenderOffset = this.Position - TextSurface.RenderArea.Location;
 
                 //  Erase the status on the old field-of-view.
                 foreach(var cell in previousFOV)
@@ -129,7 +136,7 @@ namespace RS_Roguelike.Consoles
                 }
 
                 // Calculate the new field-of-view.
-                previousFOV = rogueFOV.ComputeFov(playerEntity.Position.X, playerEntity.Position.Y, 10, true);
+                previousFOV = rogueFOV.ComputeFov(Player.Position.X, Player.Position.Y, 10, true);
 
                 // Set status on new field-of-view.
                 foreach (var cell in previousFOV)

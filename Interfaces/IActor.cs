@@ -10,7 +10,6 @@
         int Gold { get; set; }
         int Health { get; set; }
         int MaxHealth { get; set; }
-        string Name { get; set; }
         int Speed { get; set; }
     }
 }
